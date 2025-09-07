@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules
+/client/node_modules
+
+# Production build folder
+/client/build
+/server/uploads
+
+# Environment variables (DO NOT PUSH THIS)
+.env
+/server/.env
+
+# Log files
+*.log
+
+# IDE/Editor folders
+.vscode/
+.idea/
