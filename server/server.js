@@ -20,6 +20,7 @@ app.use('/api/gallery', require('./routes/galleryRoutes'));
 
 // Serve static assets (uploaded images)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/submissions', require('./routes/submissionRoutes'));
 
 const PORT = process.env.PORT || 5000;
 

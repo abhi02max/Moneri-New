@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import GalleryPage from './pages/GalleryPage';
 import AdminLoginPage from './pages/AdminLoginPage';
@@ -11,8 +12,11 @@ import SkinAndSoulPage from './pages/SkinAndSoulPage';
 import OurCoursesPage from './pages/OurCoursesPage';
 import BeautyJournalPage from './pages/BeautyJournalPage';
 
-import './App.css'; // Global styles
-import Footer from './components/Footer';
+// --- Import the new form pages ---
+import HairTestPage from './pages/HairTestPage';
+import SkinTestPage from './pages/SkinTestPage';
+
+import './App.css'; 
 
 function App() {
   return (
@@ -29,6 +33,10 @@ function App() {
           <Route path="/beauty-journal" element={<BeautyJournalPage />} />
           <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/dashboard" element={<AdminDashboardPage />} />
+
+          {/* --- Add the new routes for the forms --- */}
+          <Route path="/hair-consultation" element={<HairTestPage />} />
+          <Route path="/skin-consultation" element={<SkinTestPage />} />
         </Routes>
       </main>
       <Footer />
