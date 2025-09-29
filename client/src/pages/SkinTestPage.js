@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const SkinTestPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -13,6 +14,7 @@ const SkinTestPage = () => {
         currentRoutine: { cleanser: '', moisturizer: '', sunscreen: '', treatments: '' },
     });
     const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,12 +36,16 @@ const SkinTestPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessage('Submitting...');
+        setIsLoading(true);
+        setMessage('');
         try {
             const response = await axios.post('/api/submissions/skin', formData);
             setMessage(response.data.message);
         } catch (error) {
-            setMessage('Submission failed. Please try again.');
+            console.error('Submission error:', error);
+            setMessage(error.response?.data?.message || 'Submission failed. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -78,6 +84,13 @@ const SkinTestPage = () => {
                             <div className="form-grid">
                                 <div className="form-group"><label>Name</label><input type="text" name="name" value={formData.name} onChange={handleChange} required /></div>
                                 <div className="form-group"><label>Age</label><input type="number" name="age" value={formData.age} onChange={handleChange} required /></div>
+                                <div className="form-group"><label>Gender</label>
+                                    <div className="radio-group">
+                                        {["Female", "Male", "Other"].map(item => (
+                                            <div key={item}><input type="radio" id={`gender-${item}`} name="gender" value={item} checked={formData.gender === item} onChange={handleChange} /><label htmlFor={`gender-${item}`}>{item}</label></div>
+                                        ))}
+                                    </div>
+                                </div>
                                 <div className="form-group"><label>Contact Number</label><input type="tel" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required /></div>
                                 <div className="form-group"><label>Email</label><input type="email" name="email" value={formData.email} onChange={handleChange} required /></div>
                             </div>
@@ -136,7 +149,9 @@ const SkinTestPage = () => {
                     <div className="form-navigation">
                         {currentStep > 1 && <button type="button" className="btn btn-secondary" onClick={prevStep}>Previous Step</button>}
                         {currentStep < 4 && <button type="button" className="btn" onClick={nextStep} style={{marginLeft: 'auto'}}>Next Step</button>}
-                        {currentStep === 4 && <button type="submit" className="btn" style={{marginLeft: 'auto'}}>Submit My Consultation</button>}
+                        {currentStep === 4 && <button type="submit" className="btn" style={{marginLeft: 'auto'}} disabled={isLoading}>
+                            {isLoading ? <LoadingSpinner size="small" /> : 'Submit My Consultation'}
+                        </button>}
                     </div>
                     {message && !message.includes('success') && <p style={{marginTop: '1rem', textAlign: 'center'}}>{message}</p>}
                 </form>
