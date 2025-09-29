@@ -32,7 +32,7 @@ const HomePage = () => {
   return (
     <>
       <section className="hero">
-        <video className="hero-video" autoPlay loop muted playsInline poster={salonImg}>
+        <video className="hero-video" autoPlay loop muted playsInline>
           <source src={"/assets/videos/spavideo.mp4"} type="video/mp4" />
         </video>
         <div className="hero-content reveal">
