@@ -9,6 +9,10 @@ Full-stack app with React (CRA) client and Express/MongoDB server.
      - `MONGO_URI=your_mongodb_uri`
      - `JWT_SECRET=your_secret`
      - `PORT=5000`
+     - Optional email notifications:
+       - `EMAIL_USER=your_outlook_username@example.com`
+       - `EMAIL_PASS=your_outlook_app_password`
+       - `NOTIFICATION_EMAIL=recipient@example.com`
    - Install and run:
      - `cd server`
      - `npm ci` (or `npm install`)
