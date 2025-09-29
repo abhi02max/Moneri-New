@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BeautyJournalPage = () => {
+    const posts = [
+        { id: 1, title: "5 Ways to Maintain Your Post-Facial Glow", category: "Skincare", image: "http://googleusercontent.com/image_generation_content/2" },
+        { id: 2, title: "Is a Keratin Treatment Right For Your Hair Type?", category: "Hair Care", image: "http://googleusercontent.com/image_generation_content/4" },
+        { id: 3, title: "Self-Care Rituals: Creating a Spa Experience at Home", category: "Wellness", image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto=format&fit=crop" },
+    ];
+
     return (
         <>
             <div className="page-header">
@@ -8,18 +15,23 @@ const BeautyJournalPage = () => {
                 <p>Your source for expert advice, wellness tips, and inspiration from the Moneri team.</p>
             </div>
 
-            <div className="container content-section">
-                <div className="journal-card">
-                    <h3>5 Ways to Maintain Your Post-Facial Glow</h3>
-                    <p>You've just had our Pearl Radiance Facial, and your skin is luminous. How do you keep it that way? Our lead aesthetician shares her top 5 secrets for extending that beautiful glow at home... (Full article coming soon).</p>
-                </div>
-                <div className="journal-card">
-                    <h3>Is a Keratin Treatment Right For You?</h3>
-                    <p>Thinking about taming your frizz for good? We break down the benefits of our Liquid Gold Keratin Therapy, who it's best for, and what to expect from the process... (Full article coming soon).</p>
-                </div>
-                <div className="journal-card">
-                    <h3>From Student to Stylist: An Alumni Story</h3>
-                    <p>We sit down with Priya, a graduate from our academy, to talk about her journey, her challenges, and how Moneri Academy prepared her for a successful career... (Full article coming soon).</p>
+            <div className="content-wrapper bg-alabaster">
+                <div className="container">
+                     <div className="feature-grid">
+                        {posts.map(post => (
+                            <div key={post.id} className="content-card">
+                                <div className="card-image-wrapper">
+                                    <img src={post.image} alt={post.title} />
+                                </div>
+                                <div className="card-content">
+                                    <div className="card-tag">{post.category}</div>
+                                    <h3>{post.title}</h3>
+                                    <p>Discover our expert tips and tricks to elevate your beauty routine and enhance your well-being...</p>
+                                    <Link to="#" className="btn">Read More</Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

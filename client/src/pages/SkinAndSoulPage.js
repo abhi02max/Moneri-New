@@ -1,34 +1,58 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const SkinAndSoulPage = () => {
-  return (
-    <>
-      <div className="page-header">
-        <h1>The Skin & Soul Studio</h1>
-        <p>Advanced skincare journeys designed to illuminate your complexion and spirit.</p>
-      </div>
+    return (
+        <>
+            <div className="page-header">
+                <h1>The Skin & Soul Studio</h1>
+                <p>Where advanced science meets pure serenity to unveil your natural radiance.</p>
+            </div>
 
-      <div className="container content-section">
-        <h2 style={{textAlign: 'center', marginBottom: '3rem'}}>Facial Elixirs & Rituals</h2>
-        
-        <div className="treatment-card">
-          <h3>The Pearl Radiance Facial</h3>
-          <p>Unveil your inner glow with this luxurious facial. Using potent Vitamin C and pearl extracts, this treatment targets dullness and pigmentation, brightens the complexion, and infuses the skin with antioxidants. You'll leave with skin that is visibly brighter, smoother, and utterly luminous.</p>
-        </div>
-        
-        <div className="treatment-card">
-          <h3>Cellular Renewal Ritual (HydraFacial)</h3>
-          <p>Experience the pinnacle of non-invasive skin resurfacing. Our HydraFacial technology cleanses, exfoliates, extracts, and hydrates simultaneously. It addresses fine lines, enlarged pores, and uneven texture, delivering instant results with no downtime. It's the ultimate confidence boost for your skin.</p>
-        </div>
+            <div className="content-wrapper bg-alabaster">
+                <div className="container">
+                    <div className="feature-panel" style={{marginBottom: '6rem'}}>
+                        <div className="feature-panel-image">
+                            <img src="http://googleusercontent.com/image_generation_content/1" alt="Cellular Renewal Ritual (HydraFacial)" />
+                        </div>
+                        <div className="feature-panel-text">
+                            <span className="tag">Advanced Facial</span>
+                            <h2>Cellular Renewal Ritual</h2>
+                            <p>Experience the pinnacle of non-invasive skin resurfacing. Our HydraFacial technology cleanses, exfoliates, extracts, and hydrates simultaneously, delivering instant results with no downtime.</p>
+                            <ul className="benefits-list">
+                                <li><span className="icon"><FaCheckCircle /></span> Instantly brightens dull skin</li>
+                                <li><span className="icon"><FaCheckCircle /></span> Minimizes the appearance of pores</li>
+                                <li><span className="icon"><FaCheckCircle /></span> Smooths fine lines and texture</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <div style={{textAlign: 'center', marginTop: '4rem'}}>
-          <h3>Ready for Your Glow-Up?</h3>
-          <p>Your journey to flawless skin starts here.</p>
-          <a href="YOUR_SKIN_TREATMENT_GOOGLE_FORM_LINK" target="_blank" rel="noopener noreferrer" className="btn">Book a Skin Consultation</a>
-        </div>
-      </div>
-    </>
-  );
+                    <div className="feature-panel reverse" style={{marginBottom: '6rem'}}>
+                        <div className="feature-panel-image">
+                            <img src="http://googleusercontent.com/image_generation_content/3" alt="The Pearl Radiance Facial" />
+                        </div>
+                        <div className="feature-panel-text">
+                            <span className="tag">Brightening Facial</span>
+                            <h2>The Pearl Radiance Facial</h2>
+                            <p>Unveil your inner glow with this luxurious treatment. Using potent Vitamin C and pearl extracts, this facial targets dullness and pigmentation, brightens the complexion, and infuses the skin with powerful antioxidants.</p>
+                            <ul className="benefits-list">
+                                <li><span className="icon"><FaCheckCircle /></span> Reduces dark spots and pigmentation</li>
+                                <li><span className="icon"><FaCheckCircle /></span> Boosts collagen for a firmer feel</li>
+                                <li><span className="icon"><FaCheckCircle /></span> Leaves skin utterly luminous</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="final-cta-section">
+                        <h2>Begin Your Journey to Flawless Skin</h2>
+                        <p>Not sure which treatment is right for you? Let our expert aestheticians create a personalized skincare plan based on your unique goals and concerns.</p>
+                        <Link to="/skin-consultation" className="btn">Book a Full Consultation</Link>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default SkinAndSoulPage;
