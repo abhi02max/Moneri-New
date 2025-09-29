@@ -33,7 +33,7 @@ const HomePage = () => {
     <>
       <section className="hero">
         <video className="hero-video" autoPlay loop muted playsInline poster={salonImg}>
-          <source src={heroVideo} type="video/mp4" />
+          <source src={"/assets/videos/spavideo.mp4"} type="video/mp4" />
         </video>
         <div className="hero-content reveal">
           <h1>Elegance in Experience</h1>
@@ -62,7 +62,7 @@ const HomePage = () => {
             </p>
             <div className="feature-grid">
                 <div className="content-card reveal card-delay-1">
-                    <div className="card-image-wrapper"><img src={firstImg} alt="Hair Treatment"/></div>
+                    <div className="card-image-wrapper"><img src={"/assets/images/first.jpg"} alt="Hair Treatment"/></div>
                     <div className="card-content">
                         <h3>The Hair Sanctuary</h3>
                         <p>From revitalizing spas that breathe life into your locks to artistic styling that expresses your personality, discover the pinnacle of hair care.</p>
@@ -70,7 +70,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 <div className="content-card reveal card-delay-2">
-                    <div className="card-image-wrapper"><img src={middleImg} alt="Skin Treatment"/></div>
+                    <div className="card-image-wrapper"><img src={"/assets/images/middle.avif"} alt="Skin Treatment"/></div>
                     <div className="card-content">
                         <h3>The Skin & Soul Studio</h3>
                         <p>Unveil a luminous complexion with our advanced facials, designed to purify, rejuvenate, and restore your natural glow.</p>
@@ -78,7 +78,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 <div className="content-card reveal card-delay-3">
-                    <div className="card-image-wrapper"><img src={thirdImg} alt="Massage Therapy"/></div>
+                    <div className="card-image-wrapper"><img src={"/assets/images/third.jpg"} alt="Massage Therapy"/></div>
                     <div className="card-content">
                         <h3>The Relaxation Retreat</h3>
                         <p>Melt away the stress of the world with our therapeutic massages, expertly delivered to release tension, soothe muscles, and calm the mind.</p>
@@ -98,7 +98,7 @@ const HomePage = () => {
               <Link to="/our-story" className="btn">Read Our Story</Link>
             </div>
             <div className="philosophy-image reveal">
-              <img src={salonImg} alt="Calm spa interior" />
+              <img src={"/assets/images/salon.jpg"} alt="Calm spa interior" />
             </div>
           </div>
         </div>
