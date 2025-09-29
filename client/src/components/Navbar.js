@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Dropdown from './Dropdown';
+import logoImage from '../assets/images/Sujata.jpg'; // Make sure your logo is at this path
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const sanctuariesItems = [
     { title: 'The Hair Sanctuary', path: '/hair-sanctuary' },
     { title: 'The Skin & Soul Studio', path: '/skin-and-soul' },
@@ -14,29 +13,20 @@ const Navbar = () => {
     { title: 'Our Courses', path: '/courses' },
   ];
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
     <nav className="navbar">
+      {/* The new, combined logo and brand name */}
       <Link to="/" className="navbar-brand">
-        MONERI SPA & ACADEMY
+        <img src={logoImage} alt="Moneri Spa & Academy Logo" />
+        <div className="brand-text-container">
+          <span className="brand-main-name">Moneri</span>
+          <span className="brand-sub-name">Spa & Academy</span>
+        </div>
       </Link>
       
-      <button 
-        className="mobile-menu-toggle" 
-        onClick={toggleMobileMenu}
-        aria-label="Toggle mobile menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      
-      <ul className={`navbar-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      <ul className="navbar-links">
         <li>
-          <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/">Home</NavLink>
         </li>
         <li className="nav-item">
           <span>Our Sanctuaries</span>
@@ -47,13 +37,13 @@ const Navbar = () => {
           <Dropdown items={academyItems} />
         </li>
         <li>
-          <NavLink to="/gallery" onClick={() => setIsMobileMenuOpen(false)}>Gallery</NavLink>
+          <NavLink to="/gallery">Gallery</NavLink>
         </li>
         <li>
-          <NavLink to="/beauty-journal" onClick={() => setIsMobileMenuOpen(false)}>Beauty Journal</NavLink>
+          <NavLink to="/beauty-journal">Beauty Journal</NavLink>
         </li>
         <li>
-          <NavLink to="/our-story" onClick={() => setIsMobileMenuOpen(false)}>Our Story</NavLink>
+          <NavLink to="/our-story">Our Story</NavLink>
         </li>
       </ul>
     </nav>

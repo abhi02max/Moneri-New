@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaInstagram, FaFacebookF, FaWhatsapp } from 'react-icons/fa';
+// FaFacebookF has been removed from the import
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import { FaLinkedinIn } from 'react-icons/fa6'; // Using a specific LinkedIn icon
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear() > 2025 ? new Date().getFullYear() : 2025;
+    const currentYear = new Date().getFullYear();
 
     return (
         <footer className="footer">
@@ -12,8 +14,14 @@ const Footer = () => {
                     <h3 className="footer-brand">Moneri Spa & Academy</h3>
                     <p>A sanctuary where modern wellness meets timeless beauty. Your journey to radiance and tranquility begins here.</p>
                     <div className="social-icons">
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
+                        {/* UPDATED Instagram link */}
+                        <a href="https://www.instagram.com/sujata_balan?igsh=bnpreWNoN3RwaDNy&utm_source=qr" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                        
+                        {/* UPDATED LinkedIn link */}
+                        <a href="http://linkedin.com/in/sujata-balan-801597276" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></a>
+
+                        {/* REMOVED Facebook link */}
+                        
                         <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
                     </div>
                 </div>
@@ -24,7 +32,7 @@ const Footer = () => {
                         <li><Link to="/our-story">Our Story</Link></li>
                         <li><Link to="/gallery">Gallery</Link></li>
                         <li><Link to="/beauty-journal">Beauty Journal</Link></li>
-                        <li><Link to="/admin">Admin Login</Link></li> {/* <-- THIS IS THE NEW LINK */}
+                        <li><Link to="/admin">Admin Login</Link></li>
                     </ul>
                 </div>
 
@@ -40,7 +48,7 @@ const Footer = () => {
                 <div className="footer-col">
                     <h4>Contact Us</h4>
                     <p>392, Ramkrishna Nagar Road, Near Hindustan More, Kolkata</p>
-                    <p>Email: info@monerispaacademy.com</p>
+                    <p>Email: info@monerispaacademy.in</p>
                     <p>Call: (+91) 967-416-8149</p>
                 </div>
             </div>
