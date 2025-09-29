@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
+import cell from '../assets/images/cellular.png';
+import pear from '../assets/images/pearl.png';
 
 const SkinAndSoulPage = () => {
     return (
@@ -14,7 +16,7 @@ const SkinAndSoulPage = () => {
                 <div className="container">
                     <div className="feature-panel" style={{marginBottom: '6rem'}}>
                         <div className="feature-panel-image">
-                            <img src="http://googleusercontent.com/image_generation_content/1" alt="Cellular Renewal Ritual (HydraFacial)" />
+                            <img src={cell} alt="Cellular Renewal Ritual (HydraFacial)" />
                         </div>
                         <div className="feature-panel-text">
                             <span className="tag">Advanced Facial</span>
@@ -30,7 +32,7 @@ const SkinAndSoulPage = () => {
 
                     <div className="feature-panel reverse" style={{marginBottom: '6rem'}}>
                         <div className="feature-panel-image">
-                            <img src="http://googleusercontent.com/image_generation_content/3" alt="The Pearl Radiance Facial" />
+                            <img src={pear} alt="The Pearl Radiance Facial" />
                         </div>
                         <div className="feature-panel-text">
                             <span className="tag">Brightening Facial</span>

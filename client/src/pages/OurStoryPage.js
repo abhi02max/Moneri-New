@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaHeart, FaLeaf, FaStar } from 'react-icons/fa';
+import sujata from '../assets/images/Sujata.jpg';
+
 
 const OurStoryPage = () => {
   return (
@@ -15,14 +17,14 @@ const OurStoryPage = () => {
             <div className="philosophy-text">
               <h2>A Founder's Dream</h2>
               <p>
-                Moneri Spa & Academy was born from the vision of our founder, Monisha Roy. With over 15 years in the wellness industry, Monisha dreamed of a space where women could not only receive world-class treatments but also feel deeply seen, cared for, and empowered.
+                Moneri Spa & Academy was born from the vision of our founder, Sujata Mandal. With over 15 years in the wellness industry, Sujata dreamed of a space where women could not only receive world-class treatments but also feel deeply seen, cared for, and empowered.
               </p>
               <p>
                 She envisioned a haven that blended the precision of modern aesthetic science with the timeless wisdom of holistic healing. It wasn't just about beauty; it was about creating moments of profound peace and confidence.
               </p>
             </div>
             <div className="philosophy-image">
-              <img src="http://googleusercontent.com/image_generation_content/0" alt="Founder of Moneri Spa, Monisha Roy" />
+              <img src={sujata} alt="Founder of Moneri Spa, Sujata Mandal" />
             </div>
           </div>
         </div>

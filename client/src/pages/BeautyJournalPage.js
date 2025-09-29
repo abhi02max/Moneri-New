@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import way from '../assets/images/5ways.png';
+import kera from '../assets/images/keratin.png';
 
 const BeautyJournalPage = () => {
     const posts = [
-        { id: 1, title: "5 Ways to Maintain Your Post-Facial Glow", category: "Skincare", image: "http://googleusercontent.com/image_generation_content/2" },
-        { id: 2, title: "Is a Keratin Treatment Right For Your Hair Type?", category: "Hair Care", image: "http://googleusercontent.com/image_generation_content/4" },
-        { id: 3, title: "Self-Care Rituals: Creating a Spa Experience at Home", category: "Wellness", image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto=format&fit=crop" },
+        // Change image: {way} to image: way
+        { id: 1, title: "5 Ways to Maintain Your Post-Facial Glow", category: "Skincare", image: way },
+        
+        // Change image: {kera} to image: kera
+        { id: 2, title: "Is a Keratin Treatment Right For Your Hair Type?", category: "Hair Care", image: kera },
+        
+        { id: 3, title: "Self-Care Rituals: Creating a Spa Experience at Home", category: "Wellness", image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto.format&fit=crop" },
     ];
 
     return (
@@ -22,6 +28,7 @@ const BeautyJournalPage = () => {
                             <div key={post.id} className="content-card">
                                 <div className="card-image-wrapper">
                                     <img src={post.image} alt={post.title} />
+                                 Odds are you'll find something you like.
                                 </div>
                                 <div className="card-content">
                                     <div className="card-tag">{post.category}</div>
