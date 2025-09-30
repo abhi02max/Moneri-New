@@ -10,7 +10,28 @@ connectDB();
 const app = express();
 
 // Init Middleware
-app.use(cors());
+// Explicit CORS allowlist for both projects and local dev
+const allowedOrigins = [
+  'https://monerispaacadmey.in',
+  'https://www.monerispaacadmey.in',
+  'https://getinteviewconfidence.com',
+  'https://www.getinteviewconfidence.com',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // allow non-browser or same-origin
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
