@@ -12,12 +12,15 @@ const AdminLoginPage = () => {
     e.preventDefault();
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
-      const { data } = await axios.post('/api/auth/login', { username, password }, config);
+      const baseURL = process.env.REACT_APP_API_URL || '';
+      const url = `${baseURL}/api/auth/login`;
+      const { data } = await axios.post(url, { username, password }, config);
       
       localStorage.setItem('adminInfo', JSON.stringify(data));
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid username or password');
+      const message = err?.response?.data?.message || 'Login failed';
+      setError(message);
     }
   };
 
