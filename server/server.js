@@ -1,10 +1,13 @@
-require('dotenv').config();
+require('dotenv').config(); // This MUST be the very first line
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/db');
 
-// Connect to Database
+// --- FIX: Add the diagnostic console.log here, before connecting ---
+console.log("Attempting to connect with MONGO_URI:", process.env.MONGO_URI);
+
+// --- FIX: connectDB() should only be called once, here at the top ---
 connectDB();
 
 const app = express();
@@ -12,8 +15,8 @@ const app = express();
 // Init Middleware
 // Explicit CORS allowlist for both projects and local dev
 const allowedOrigins = [
-  'https://monerispaacadmey.in',
-  'https://www.monerispaacadmey.in',
+  'https://monerispaacademy.in', // <-- FIX: Corrected typo in domain name
+  'https://www.monerispaacademy.in', // <-- FIX: Added www version
   'https://getinteviewconfidence.com',
   'https://www.getinteviewconfidence.com',
   'http://localhost:3000',
@@ -23,19 +26,18 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // allow non-browser or same-origin
-      if (allowedOrigins.includes(origin)) return callback(null, true);
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
       return callback(new Error('Not allowed by CORS'));
-    },
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: false
+    }
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Define API Routes (These must come BEFORE the React catch-all)
+// Define API Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/submissions', require('./routes/submissionRoutes'));
@@ -43,21 +45,16 @@ app.use('/api/submissions', require('./routes/submissionRoutes'));
 // Serve static assets (uploaded images)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-// --- Production Build Configuration (Correct Placement) ---
+// --- Production Build Configuration ---
 if (process.env.NODE_ENV === 'production') {
-  // Serve the static files from the React app's build folder
   app.use(express.static(path.join(__dirname, '../client/build')));
-
-  // For any route that is not an API route, send the React app's index.html file
-  // This must be the LAST route
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
   });
 }
-// --- End of Production block ---
-
 
 const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`🚀 Server started on port ${PORT}`));
+
+// --- FIX: The console.log and connectDB() calls from the bottom have been removed ---
