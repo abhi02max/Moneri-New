@@ -1,3 +1,4 @@
+// Paste the code for AdminLoginPage.js that I provided in the previous "Quiet Luxury" design response.
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -12,15 +13,13 @@ const AdminLoginPage = () => {
     e.preventDefault();
     try {
       const config = { headers: { 'Content-Type': 'application/json' } };
-      const baseURL = process.env.REACT_APP_API_URL || '';
-      const url = `${baseURL}/api/auth/login`;
-      const { data } = await axios.post(url, { username, password }, config);
+      // Note: We are using the proxy, so we don't need http://localhost:5001 here
+      const { data } = await axios.post('/api/auth/login', { username, password }, config);
       
       localStorage.setItem('adminInfo', JSON.stringify(data));
       navigate('/dashboard');
     } catch (err) {
-      const message = err?.response?.data?.message || 'Login failed';
-      setError(message);
+      setError('Invalid username or password');
     }
   };
 
