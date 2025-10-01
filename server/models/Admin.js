@@ -15,11 +15,12 @@ const AdminSchema = new mongoose.Schema({
 
 // This function runs BEFORE a new admin is saved. It hashes the password.
 AdminSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    next();
-  }
+  // Only hash the password if it has been modified (or is new)
+  if (!this.isModified('password')) return next();
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
 // This function compares the login password to the hashed password in the DB

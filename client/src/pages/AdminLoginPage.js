@@ -6,20 +6,28 @@ import { useNavigate } from 'react-router-dom';
 const AdminLoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorMessage('');
+    setIsSubmitting(true);
     try {
-      const config = { headers: { 'Content-Type': 'application/json' } };
-      // Note: We are using the proxy, so we don't need http://localhost:5001 here
-      const { data } = await axios.post('/api/auth/login', { username, password }, config);
-      
+      const { data } = await axios.post('/api/auth/login', { username, password }, {
+        headers: { 'Content-Type': 'application/json' }
+      });
       localStorage.setItem('adminInfo', JSON.stringify(data));
       navigate('/dashboard');
-    } catch (err) {
-      setError('Invalid username or password');
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setErrorMessage('Invalid username or password');
+      } else {
+        setErrorMessage('Unable to sign in. Please try again later.');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -29,7 +37,7 @@ const AdminLoginPage = () => {
         <h1 className="brand-heading">Moneri</h1>
         <p className="subtitle">Administrator Sign In</p>
         <form onSubmit={handleSubmit}>
-          {error && <p className="error-message" style={{textAlign: 'center'}}>{error}</p>}
+          {errorMessage && <p className="error-message" style={{textAlign: 'center'}}>{errorMessage}</p>}
           <div className="form-group">
             <label>Username</label>
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -38,8 +46,8 @@ const AdminLoginPage = () => {
             <label>Password</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
-          <button type="submit" className="btn" style={{ width: '100%', marginTop: '1rem' }}>
-            Sign In
+          <button type="submit" className="btn" style={{ width: '100%', marginTop: '1rem' }} disabled={isSubmitting}>
+            {isSubmitting ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
       </div>

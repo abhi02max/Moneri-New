@@ -55,24 +55,25 @@ const AdminDashboardPage = () => {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (files.length) {
-      handleFileSelect(files[0]);
-    }
+    const file = e.dataTransfer.files[0];
+    if (file) handleFileSelect(file);
   };
 
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!imageFile) return setMessage('Please select an image to upload.');
-    
+
     const formData = new FormData();
-    formData.append('tagline', tagline);
     formData.append('image', imageFile);
+    if (tagline && tagline.trim().length > 0) {
+      formData.append('tagline', tagline.trim());
+    }
 
     try {
-      const { token } = JSON.parse(localStorage.getItem('adminInfo'));
+      const stored = localStorage.getItem('adminInfo');
+      if (!stored) return setMessage('Session expired. Please login again.');
+      const { token } = JSON.parse(stored);
       const config = { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } };
-      
       await axios.post('/api/gallery/upload', formData, config);
       setMessage('Upload successful!');
       setTagline('');

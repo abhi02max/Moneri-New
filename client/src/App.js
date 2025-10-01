@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -34,7 +34,14 @@ function App() {
             <Route path="/courses" element={<OurCoursesPage />} />
             <Route path="/beauty-journal" element={<BeautyJournalPage />} />
             <Route path="/admin" element={<AdminLoginPage />} />
-            <Route path="/dashboard" element={<AdminDashboardPage />} />
+            <Route
+              path="/dashboard"
+              element={
+                localStorage.getItem('adminInfo')
+                  ? <AdminDashboardPage />
+                  : <Navigate to="/admin" replace />
+              }
+            />
 
             {/* --- Add the new routes for the forms --- */}
             <Route path="/hair-consultation" element={<HairTestPage />} />

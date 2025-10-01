@@ -10,6 +10,9 @@ exports.loginAdmin = async (req, res) => {
   const { username, password } = req.body;
   try {
     const admin = await Admin.findOne({ username });
+    if (!admin) {
+      console.warn(`[AUTH] Login failed: username not found -> ${username}`);
+    }
     if (admin && (await admin.matchPassword(password))) {
       res.json({
         _id: admin._id,
@@ -17,9 +20,13 @@ exports.loginAdmin = async (req, res) => {
         token: generateToken(admin._id),
       });
     } else {
+      if (admin) {
+        console.warn(`[AUTH] Login failed: password mismatch for username -> ${username}`);
+      }
       res.status(401).json({ message: 'Invalid username or password' });
     }
   } catch (error) {
+    console.error('[AUTH] Login error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
